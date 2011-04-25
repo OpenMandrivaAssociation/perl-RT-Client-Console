@@ -57,8 +57,6 @@ rm -rf %buildroot
 %files
 %defattr(-,root,root)
 %doc Changes README META.yml
-%{_mandir}/man3/*
+%{_bindir}/*
+%{_mandir}/man?/*
 %perl_vendorlib/*
-/usr/bin/rtconsole
-/usr/share/man/man1/rtconsole.1.lzma
-
