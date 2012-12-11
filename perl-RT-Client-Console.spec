@@ -1,31 +1,31 @@
 %define upstream_name    RT-Client-Console
 %define upstream_version 0.2.0
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 2
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	3
 
-Summary:    Non-blocking Curses.pm input for full-screen console apps
-License:    GPL+ or Artistic
-Group:      Development/Perl
-Url:        http://search.cpan.org/dist/%{upstream_name}
-Source0:    http://www.cpan.org/modules/by-module/RT/%{upstream_name}-%{upstream_version}.tar.gz
+Summary:	Non-blocking Curses.pm input for full-screen console apps
+License:	GPL+ or Artistic
+Group:		Development/Perl
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/RT/%{upstream_name}-%{upstream_version}.tar.gz
 
-BuildRequires: perl(Config::Tiny)
-BuildRequires: perl(Curses)
-BuildRequires: perl(Curses::Forms)
-BuildRequires: perl(Curses::Widgets)
-BuildRequires: perl(Error)
-BuildRequires: perl(List::MoreUtils)
-BuildRequires: perl(POE)
-BuildRequires: perl(Params::Validate)
-BuildRequires: perl(RT::Client::REST)
-BuildRequires: perl(Test::More)
-BuildRequires: perl(parent)
-BuildRequires: perl(relative)
-BuildRequires: perl(version)
-BuildArch: noarch
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}
+BuildRequires:	perl-devel
+BuildRequires:	perl(Config::Tiny)
+BuildRequires:	perl(Curses)
+BuildRequires:	perl(Curses::Forms)
+BuildRequires:	perl(Curses::Widgets)
+BuildRequires:	perl(Error)
+BuildRequires:	perl(List::MoreUtils)
+BuildRequires:	perl(POE)
+BuildRequires:	perl(Params::Validate)
+BuildRequires:	perl(RT::Client::REST)
+BuildRequires:	perl(Test::More)
+BuildRequires:	perl(parent)
+BuildRequires:	perl(relative)
+BuildRequires:	perl(version)
+BuildArch:	noarch
 
 %description
 RT::Client::Console distribution provides an executable _rtconsole_ and
@@ -40,23 +40,31 @@ enable more flexibility.
 %setup -q -n %{upstream_name}-%{upstream_version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
-
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf %buildroot
 %makeinstall_std
 
-%clean
-rm -rf %buildroot
-
 %files
-%defattr(-,root,root)
 %doc Changes README META.yml
 %{_bindir}/*
 %{_mandir}/man?/*
-%perl_vendorlib/*
+%{perl_vendorlib}/*
+
+%changelog
+* Mon Apr 25 2011 Funda Wang <fwang@mandriva.org> 0.2.0-2mdv2011.0
++ Revision: 658630
+- update file list
+- rebuild for updated spec-helper
+
+* Wed Jun 09 2010 Jérôme Quelin <jquelin@mandriva.org> 0.2.0-1mdv2011.0
++ Revision: 547337
+- import perl-RT-Client-Console
+
+
+* Wed Jun 09 2010 cpan2dist 0.2.0-1mdv
+- initial mdv release, generated with cpan2dist
