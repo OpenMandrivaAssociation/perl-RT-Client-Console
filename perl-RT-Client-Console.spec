@@ -3,7 +3,7 @@
 
 Name:		perl-%{upstream_name}
 Version:	%perl_convert_version %{upstream_version}
-Release:	3
+Release:	4
 
 Summary:	Non-blocking Curses.pm input for full-screen console apps
 License:	GPL+ or Artistic
